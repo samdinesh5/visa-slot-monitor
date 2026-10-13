@@ -66,9 +66,10 @@ jobs:
         run: python monitor.py
         env:
           # These come from GitHub Secrets — never hardcode credentials here
-          TELEGRAM_ENABLED:     "true"
-          TELEGRAM_BOT_TOKEN:   ${{ secrets.TELEGRAM_BOT_TOKEN }}
-          TELEGRAM_CHAT_ID:     ${{ secrets.TELEGRAM_CHAT_ID }}
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          CHECK_INTERVAL: "0"
 
           # Optional: uncomment and add secrets if you want WhatsApp/SMS too
           # WHATSAPP_ENABLED:       "true"
