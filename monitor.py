@@ -146,11 +146,14 @@ async def check_all_urls(browser, state: dict, texts: dict) -> bool:
                 log.info(f"   🔔 CHANGE DETECTED: {label}")
                 diff = summarize_change(texts.get(url, ""), new_text)
                 message = (
-                    f"🚨 *Visa Slot Change Detected!*\n\n"
-                    f"📍 *Site:* {label}\n"
-                    f"🔗 {url}\n\n"
-                    f"{diff}\n\n"
-                    f"🕐 {now}"
+                   message = (
+    f"⚠️ PAGE CONTENT CHANGED — NOT A CONFIRMED SLOT\n\n"
+    f"Site: {label}\n"
+    f"URL: {url}\n\n"
+    f"{diff}\n\n"
+    f"Checked: {now}\n\n"
+    f"Please verify availability on the official scheduling portal."
+)
                 )
                 await send_notification(message)
                 state[url]["hash"] = new_hash
