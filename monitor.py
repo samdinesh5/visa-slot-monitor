@@ -68,8 +68,17 @@ async def get_page_content(browser, url: str) -> tuple[str, str]:
     )
     page = await context.new_page()
     try:
-        await page.goto(url, wait_until="domcontentloaded", timeout=60_000)
-        await page.wait_for_timeout(5_000)
+        response = await page.goto(
+    url,
+    wait_until="domcontentloaded",
+    timeout=60_000
+)
+
+if response is None or not response.ok:
+    status = response.status if response else "no response"
+    raise RuntimeError(f"Page unavailable: HTTP {status}")
+
+await page.wait_for_timeout(5_000)
 
         if "#" in url:
             fragment = url.split("#")[-1]
